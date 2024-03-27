@@ -31,8 +31,88 @@ We use this categorical data encoding technique when the features are nominal(do
 • Yeojohnson method
 
 # CODING AND OUTPUT:
-       # INCLUDE YOUR CODING AND OUTPUT SCREENSHOTS HERE
+
+## ORDINAL ENCODENING
+```py
+import pandas as pd
+import numpy as np
+import seaborn as sns
+df=pd.read_csv("/content/Encoding Data.csv")
+df
+```
+![](./out1.png)
+
+```py
+from sklearn.preprocessing import LabelEncoder,OrdinalEncoder
+pm=['Hot','Warm','Cold']
+e1=OrdinalEncoder(categories=[pm])
+e1.fit_transform(df[['ord_2']])
+```
+![](./out2.png)
+
+```py
+df['bo2']=e1.fit_transform(df[['ord_2']])
+df
+```
+![](./out3.png)
+
+```py
+dfc['ord_2']=le.fit_transform(df[['ord_2']])
+```
+![](./out4.png)
+```py
+dfc
+```
+![](./out5.png)
+
+```py
+from sklearn.preprocessing import OneHotEncoder
+ohe=OneHotEncoder(sparse=False)
+df2=df.copy()
+enc=pd.DataFrame(ohe.fit_transform(df[['nom_0']]))
+```
+![](./out6.png)
+```py
+df2=pd.concat([df2,enc],axis=1)
+df2
+```
+![](./out7.png)
+
+```py
+pd.get_dummies(df2,columns=['nom_0'])
+```
+![](./out8.png)
+
+## BINARY ENCODING
+```py
+from category_encoders import BinaryEncoder
+df=pd.read_csv("/content/data.csv")
+df
+```
+![](./out9.png)
+
+```py
+be=BinaryEncoder()
+nd=be.fit_transform(df['Ord_2'])
+dfb=pd.concat([df,nd],axis=1)
+dfb1=df.copy()
+dfb
+```
+![](./out10.png)
+
+
+## TARGET ENCODER
+```py
+from category_encoders import TargetEncoder
+te=TargetEncoder()
+cc=df.copy()
+new=te.fit_transform(X=cc['City'],y=cc['Target'])
+cc=pd.concat([cc,new],axis=1)
+print(cc)
+```
+![](./out11.png)
+
 # RESULT:
-       # INCLUDE YOUR RESULT HERE
+The given data and perform Feature Encoding and Transformation process are performed successfully
 
        
